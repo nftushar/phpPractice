@@ -3,16 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Recommended Books</title>
+    <title>Recommended items</title>
 </head>
 
 <body>
 
-    <h1>Recommended Books</h1>
+    <h1>Recommended items</h1>
 
     <?php
 
-    $books = [
+    $items = [
         [
             'name' => 'Project Hail Merry',
             'author' => 'Andy Weir',
@@ -27,34 +27,37 @@
             'purchaseUrl' => 'https://example.com',
         ],
     ];
-    $filterByAuthor = function ($books) {
-        $filteredBoooks = [];
-        foreach ($books as $book) {
-            if ($book['author'] === 'Andy Weir') {
-                $filteredBoooks[] = $book;
+
+    function filter ($items, $kew, $value) {
+
+        $filteredItems = [];
+
+        foreach ($items as $item) {
+            if ($item[$kew] === $value) {
+                $filteredItems[] = $item;
             }
         }
-        return $filteredBoooks;
+        return $filteredItems;
     };
 
-    $filteredBoooks = $filterByAuthor($books, "");
+    $filteredItems = filter($items, $kew, $value);
 
-    function filterByYear($books)
+    function filterByYear($items)
     {
-        $filteredBoooks = [];
-        foreach ($books as $book) {
-            if ($books['releaseYear'] === 2021) {
-                $filteredBoooks[] = $book;
+        $filteredItems = [];
+        foreach ($items as $item) {
+            if ($items['releaseYear'] === 2021) {
+                $filteredItems[] = $item;
             }
         }
-        return $filteredBoooks;
+        return $filteredItems;
     }
     ?>
 
     <ul>
-        <?php foreach ($filteredBoooks as $book): ?>
+        <?php foreach ($filteredItems as $item): ?>
             <li>
-                <a href="<?= $book['purchaseUrl'] ?>"><?=  $book['name'] ?></a>
+                <a href="<?= $item['purchaseUrl'] ?>"><?=  $item['name'] ?></a>
             </li>
         <?php endforeach; ?>
     </ul>
